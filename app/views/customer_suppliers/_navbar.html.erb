@@ -1,0 +1,27 @@
+<nav class="bg-blue-500 p-4">
+  <div class="flex justify-between items-center">
+    <div>
+      <a href="#" class="text-white text-lg font-semibold">Logo</a>
+    </div>
+    <div class="hidden md:flex space-x-4">
+      <a href="/customer_suppliers" class="text-white">Home</a>
+      <a href="#" class="text-white">Customer</a>
+      <a href="#" class="text-white">Supplier</a>
+    </div>
+    <div class="flex items-center mb-4 pad-left-60 ">
+      <input id="search-checkbox" type="checkbox" value="1" class="w-4 h-4 text-blue-600 mar-right-20 ">
+      <label for="search-checkbox" class=" font-medium text-white">Supplier</label>
+    </div>
+    <div class="flex items-center space-x-2">
+      <%= search_form_for @q, html: { class: 'flex items-center space-x-2' } do |f| %>
+      <%= f.search_field :customer_or_passenger_name_or_reservation_num_cont, placeholder: "Search", class: "search-field p-2 border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
+        <%= f.submit "Search", class: "bg-white text-blue-500 px-4 py-2 rounded-md" %>
+      <% end %>
+    </div>
+    
+    <!-- <div class="flex items-center space-x-2">
+      <input type="text" placeholder="Search" class="p-2 border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500">
+      <button class="bg-white text-blue-500 px-4 py-2 rounded-md">Search</button>
+    </div> -->
+  </div>
+</nav>

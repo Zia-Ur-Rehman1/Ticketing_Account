@@ -1,0 +1,8 @@
+Rails.application.routes.draw do
+  
+  resources :customer_suppliers
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Defines the root path route ("/")
+  root "customer_suppliers#index"
+end

@@ -1,0 +1,16 @@
+<div class="flex justify-center items-center my-3 text-center">
+  <div class="bg-green-200 p-3 rounded-lg shadow-md text-center">
+    <h1 class="text-xl font-semibold ">Create New Record</h1>
+  </div>
+</div>
+<%= render "form", customer_supplier: @customer_supplier %>
+
+<br>
+
+<div class=" flex justify-center">
+  <%= link_to customer_suppliers_path, class: "flex items-center text-blue-500 hover:text-blue-700" do %>
+  <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+  </svg>
+  <% end %>
+</div>

@@ -1,0 +1,12 @@
+<tr id="<%= dom_id customer_supplier %>">
+  <% fields_to_display = customer_supplier.attributes.except('id', 'created_at', 'updated_at') %>
+  <% fields_to_display.each do |field, value| %>
+      <td class="px-6 py-4<%= ' text-red-500' if value.blank? %>"><%= value.presence || 'N/A' %></td>
+  <% end %>
+  <td class="flex px-6 py-4">
+  <%= link_to "Show",customer_supplier_path(customer_supplier) %> 
+  <%= link_to "Edit", edit_customer_supplier_path(customer_supplier) %> 
+  <%= button_to "Destroy", customer_supplier, method: :delete %>
+
+  </td>
+</tr>

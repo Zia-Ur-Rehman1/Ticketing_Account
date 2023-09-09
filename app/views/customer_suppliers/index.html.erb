@@ -1,0 +1,40 @@
+<%= render 'navbar' %>
+
+<div class="flex justify-end p-4">
+  <%= link_to new_customer_supplier_path, class: "bg-blue-500 hover:bg-blue-700 text-white rounded-full w-10 h-10 flex items-center justify-center" do %>
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    </svg>
+  <% end %>
+</div>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-2">
+    <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th class="px-6 py-3">Sector</th>
+                <th class="px-6 py-3">Passenger Name</th>
+                <th class="px-6 py-3">Reservation Num</th>
+                <th class="px-6 py-3">Reservation Type</th>
+                <th class="px-6 py-3">Supplier</th>
+                <th class="px-6 py-3">Air Line</th>
+                <th class="px-6 py-3">Travel Date</th>
+                <th class="px-6 py-3">Created Date</th>
+                <th class="px-6 py-3">Ref Date</th>
+                <th class="px-6 py-3">Deal</th>
+                <th class="px-6 py-3">Sale</th>
+                <th class="px-6 py-3">Purchase</th>
+                <th class="px-6 py-3">Customer</th>
+                <th class="px-6 py-3">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @customer_suppliers.each do |customer_supplier| %>
+                <%= render customer_supplier %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+
+

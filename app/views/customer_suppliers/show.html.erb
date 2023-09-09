@@ -1,0 +1,19 @@
+
+<div class="mx-2 mt-20 relative overflow-x-auto shadow-md sm:rounded-lg ">
+  <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <% fields_to_display = @customer_supplier.attributes.except('id', 'created_at', 'updated_at') %>
+          <% fields_to_display.each do |field, value| %>
+            <th class="px-6 py-3"><%= field.humanize %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% fields_to_display.each do |field, value| %>
+            <td class="px-6 py-4<%= ' text-red-500' if value.blank? %>"><%= @customer_supplier[field] || 'N/A' %></td>
+          <% end %>
+        </tr>  
+      </tbody>
+  </table>

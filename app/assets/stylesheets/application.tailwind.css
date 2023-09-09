@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.pad-left-60 {
+  padding-left: 60%
+}
+.mar-right-20{
+  margin-right: 20%;
+}
+/*
+
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-200;
+  }
+}
+
+*/

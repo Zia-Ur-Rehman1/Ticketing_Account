@@ -25,8 +25,9 @@ class CustomerSuppliersController < ApplicationController
 
     respond_to do |format|
       if @customer_supplier.save
-        format.html { redirect_to customer_supplier_url(@customer_supplier), notice: "Customer supplier was successfully created." }
-        format.json { render :show, status: :created, location: @customer_supplier }
+        format.html { redirect_to root_url, notice: "Customer supplier was successfully created." }
+        format.json { redirect_to root_url, status: :created }
+        # format.json { render :show, status: :created, location: @customer_supplier }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @customer_supplier.errors, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class CustomerSuppliersController < ApplicationController
   def update
     respond_to do |format|
       if @customer_supplier.update(customer_supplier_params)
-        format.html { redirect_to customer_supplier_url(@customer_supplier), notice: "Customer supplier was successfully updated." }
+        format.html { redirect_to root_url, notice: "Customer supplier was successfully Updated." }
         format.json { render :show, status: :ok, location: @customer_supplier }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +53,7 @@ class CustomerSuppliersController < ApplicationController
     @customer_supplier.destroy
 
     respond_to do |format|
-      format.html { redirect_to customer_suppliers_url, notice: "Customer supplier was successfully destroyed." }
+      format.html { redirect_to root_url, notice: "Customer supplier was successfully destroyed." }
       format.json { head :no_content }
     end
   end

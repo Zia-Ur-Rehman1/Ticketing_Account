@@ -1,15 +1,45 @@
 class CustomerSuppliersController < ApplicationController
   before_action :set_customer_supplier, only: %i[ show edit update destroy ]
-
+  require 'csv'
   # GET /customer_suppliers or /customer_suppliers.json
+  def export_csv
+    file = "#{Rails.root}/public/supplier.csv"
+    data = CustomerSupplier.all
+    headers = CustomerSupplier.column_names
+    CSV.open(file,'w', write_headers: true, headers: headers) do |csv|
+      data.each do |row|
+        row_data = headers.map { |header| row[header] }
+        csv << row_data
+      end
+    end
+    respond_to do |format|
+      format.html { redirect_to root_url, notice: "CSV file successfully created." }
+    end
+  end
+
   def index
     @q = CustomerSupplier.ransack(params[:q])
-    @customer_suppliers = @q.result(distinct: true)
+    @pagy, @customer_suppliers = pagy(@q.result(distinct: true).order(created_at: :asc), items: 10)
   end
   # GET /customer_suppliers/1 or /customer_suppliers/1.json
   def show
   end
 
+  def customers
+    @customers_with_balances = CustomerSupplier.select('customer, SUM(sale - purchase) AS balance').group(:customer)
+    @total_balance = @customers_with_balances.sum(&:balance)
+  end
+
+  def suppliers
+    @suppliers = CustomerSupplier.select('supplier, SUM(purchase) AS balance').group(:supplier)
+    @total_balance = @suppliers.sum(&:balance)
+  end
+
+  def customer
+    @customer = CustomerSupplier.where(customer: params[:name])
+    @name = params[:name]
+    @total_balance = @customer.sum('sale-purchase')
+  end
   # GET /customer_suppliers/new
   def new
     @customer_supplier = CustomerSupplier.new

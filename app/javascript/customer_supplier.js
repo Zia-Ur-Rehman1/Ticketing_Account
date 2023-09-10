@@ -5,3 +5,8 @@ $(document).on('change', '#search-checkbox', function(){
       $('.search-field').attr('name', 'q[customer_or_passenger_name_or_reservation_num_cont]');
     }
   })
+$(document).ready(function() {
+  $("#mobile-menu-button").click(function() {
+    $("#mobile-menu").toggleClass("hidden");
+  });
+});

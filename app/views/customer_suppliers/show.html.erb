@@ -3,7 +3,7 @@
   <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
-          <% fields_to_display = @customer_supplier.attributes.except('id', 'created_at', 'updated_at') %>
+          <% fields_to_display = @customer_supplier.attributes.except('id', 'created_at', 'updated_at', 'reservation_type', 'current_date') %>
           <% fields_to_display.each do |field, value| %>
             <th class="px-6 py-3"><%= field.humanize %></th>
           <% end %>

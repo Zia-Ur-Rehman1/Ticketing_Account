@@ -4,7 +4,7 @@ class CustomerSuppliersController < ApplicationController
 
   
   def export_csv
-    selected_columns= ["sector", "passenger_name", "reservation_num", "supplier", "air_line", "travel_date", "ref_date", "deal", "sale", "purchase", "customer", 'created_at']
+    selected_columns= ["sector", "passenger_name", "reservation_num", "supplier", "air_line", "travel_date", "deal", "sale", "purchase", "customer", 'created_at']
 
     base_query = CustomerSupplier.select(selected_columns)
     if params[:customer].present?
@@ -75,7 +75,7 @@ class CustomerSuppliersController < ApplicationController
   def supplier
     @supplier = CustomerSupplier.where(supplier: params[:name])
     @name = params[:name]
-    @total_balance = @customer.sum(:sale) - @customer.sum(:purchase)
+    @total_balance = @supplier.sum(:sale) - @supplier.sum(:purchase)
   end
 
   # GET /customer_suppliers/new
@@ -134,6 +134,6 @@ class CustomerSuppliersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def customer_supplier_params
-      params.require(:customer_supplier).permit(:sector, :passenger_name, :reservation_num, :reservation_type, :supplier, :air_line, :travel_date, :current_date, :ref_date, :deal, :sale, :purchase, :customer)
+      params.require(:customer_supplier).permit(:sector, :passenger_name, :reservation_num,  :supplier, :air_line, :travel_date,  :deal, :sale, :purchase, :customer)
     end
 end

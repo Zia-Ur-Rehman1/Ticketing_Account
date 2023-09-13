@@ -19,17 +19,17 @@ class XlsxImporter
   private
 
   def map_row_to_record(worksheet, row_num, record)
-    record.created_at = worksheet.cell(row_num, 2)
-    record.passenger_name = worksheet.cell(row_num, 3)
-    record.sector = worksheet.cell(row_num, 4)
-    record.reservation_num = worksheet.cell(row_num, 5)
-    record.supplier = worksheet.cell(row_num, 6)
-    record.customer = worksheet.cell(row_num, 7)
-    record.air_line = worksheet.cell(row_num, 8)
-    record.travel_date = parse_date(worksheet.cell(row_num, 9))
-    record.deal = worksheet.cell(row_num, 10)
-    record.sale = worksheet.cell(row_num, 11)
-    record.purchase = worksheet.cell(row_num, 12)
+    record.created_at = worksheet.cell(row_num, 1)
+    record.passenger_name = worksheet.cell(row_num, 2)
+    record.sector = worksheet.cell(row_num, 3)
+    record.reservation_num = worksheet.cell(row_num, 4)
+    record.supplier = worksheet.cell(row_num, 5)
+    record.customer = worksheet.cell(row_num, 6)
+    record.air_line = worksheet.cell(row_num, 7)
+    record.travel_date = parse_date(worksheet.cell(row_num, 8))
+    record.deal = worksheet.cell(row_num, 9)
+    record.sale = worksheet.cell(row_num, 10)
+    record.purchase = worksheet.cell(row_num, 11)
   end
 
   def parse_date(date_string)

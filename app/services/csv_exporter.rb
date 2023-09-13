@@ -19,7 +19,7 @@ class CsvExporter
   private
 
   def csv_headers
-    csv_headers= ["Sector", "Passenger Name", "Reservation Num", "Supplier", "Air_line", "Travel_date", "Ref Date", "Deal", "Sale", "Purchase", "Customer", "Date"]
+    csv_headers= ["Sector", "Passenger Name", "Reservation Num", "Supplier", "Air_line", "Travel_date", "Deal", "Sale", "Purchase", "Customer", "Date"]
   end
 
   def csv_row(record)
@@ -30,7 +30,6 @@ class CsvExporter
       record.supplier,
       record.air_line,
       record.travel_date,
-      record.ref_date,
       record.deal,
       record.sale,
       record.purchase,

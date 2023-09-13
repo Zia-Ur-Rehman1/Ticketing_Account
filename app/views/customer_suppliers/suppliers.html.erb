@@ -9,7 +9,7 @@
   <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     <tr>
-      <th class="py-3">Customer Name</th>
+      <th class="py-3">Supplier Name</th>
       <th class="py-3">Balance </th>
     </tr>
   </thead>
@@ -17,7 +17,11 @@
     <% @suppliers.each do |customer| %>
       <tr>
         <td class="px-6 py-4<%= ' text-red-500' if customer.blank? %>">
-          <%= link_to customer.supplier.presence || 'N/A', suppliers_customer_suppliers_path(name: customer.supplier) %></td>
+          <% if customer.supplier.present? %>
+            <%= link_to customer.supplier, supplier_customer_supplier_path(name: customer.supplier) %>
+          <% else %>
+            N/A
+          <% end %>
         </td>
         <td class="px-6 py-4 <%= customer.balance < 0 ? 'text-red-500' : 'text-green-500' %>">
           <%= customer.balance.presence || 'N/A' %>

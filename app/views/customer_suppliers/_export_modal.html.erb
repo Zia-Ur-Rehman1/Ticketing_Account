@@ -1,0 +1,50 @@
+<div data-controller="modal">
+    <button data-action="modal#open" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:ring focus:bg-blue-700 active:bg-blue-800">Export Data</button>
+    <dialog data-modal-target="modal" class="p-6 backdrop:bg-gray-400 rounded-lg w-96">
+        <button type="button" data-action="modal#close" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <h1 class="text-2xl font-semibold mb-4">Select To Export Data</h1>
+
+        <hr class="mb-4">
+
+        <form  data-modal-target="form" class="space-y-4" action="/customer_suppliers/export_csv" method="get">
+            <div class="flex flex-col">
+                <label for="customer_name" class="text-sm py-2">Customer Name</label>
+                <input list="customerNames" id="customer_name" name="customer" class="border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500">
+                    <datalist id="customerNames">
+                      <% @customer_names.each do |customer_name| %>
+                        <option value="<%= customer_name %>">
+                      <% end %>
+                    </datalist>
+            </div>
+            <div class="flex flex-col">
+                <label for="supplier_name" class="text-sm py-2">Supplier Name</label>
+                <input list="supplierNames" id="supplier_name" name="supplier" class="border rounded-lg py-2 px-3 focus:outline-none focus:border-blue-500">
+                <datalist id="supplierNames">
+                  <% @supplier_names.each do |supplier_name| %>
+                    <option value="<%= supplier_name %>">
+                  <% end %>
+                </datalist>
+                
+            </div>
+            
+            <div class='flex justify-between '>
+                <div class="form-group">
+                  <%= label_tag 'start_date', 'Start Date', class: "block text-sm font-medium text-gray-700" %>
+                  <%= date_field_tag 'start_date', nil, class: 'form-control', class: "mt-1 p-2  w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
+                </div>
+                <div class="form-group ">
+                  <%= label_tag 'end_date', 'End Date', class: "block text-sm font-medium text-gray-700" %>
+                  <%= date_field_tag 'end_date', nil, class: 'form-control', class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
+                </div>
+              </div>
+              <div class="flex justify-end">
+                <button type="submit" data-action="modal#submitForm" id="submitBtn" class="btn-outline mr-2">Submit</button>
+            </div>
+        </form>
+    </dialog>
+</div>

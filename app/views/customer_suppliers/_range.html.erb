@@ -1,0 +1,17 @@
+<%= form_tag(range_customer_suppliers_path, method: :get) do %>
+  <div class='flex '>
+  <div class="form-group">
+    <%= label_tag 'start_date', 'Start Date', class: "block text-sm font-medium text-gray-700" %>
+    <%= date_field_tag 'start_date', nil, class: 'form-control', class: "mt-1 p-2  w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
+  </div>
+  <div class="form-group ">
+    <%= label_tag 'end_date', 'End Date', class: "block text-sm font-medium text-gray-700" %>
+    <%= date_field_tag 'end_date', nil, class: 'form-control', class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
+  </div>
+</div>
+  <div class="mt-4 flex justify-center">
+    <%= submit_tag 'Submit', class: 'bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:ring focus:bg-blue-700 active:bg-blue-800' %>
+  </div>
+<% end %>
+
+

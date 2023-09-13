@@ -1,23 +1,42 @@
 class CustomerSuppliersController < ApplicationController
   before_action :set_customer_supplier, only: %i[ show edit update destroy ]
   require 'csv'
-  # GET /customer_suppliers or /customer_suppliers.json
+
+  
   def export_csv
-    file = "#{Rails.root}/public/supplier.csv"
-    data = CustomerSupplier.all
-    headers = CustomerSupplier.column_names
-    CSV.open(file,'w', write_headers: true, headers: headers) do |csv|
-      data.each do |row|
-        row_data = headers.map { |header| row[header] }
-        csv << row_data
-      end
+    selected_columns= ["sector", "passenger_name", "reservation_num", "supplier", "air_line", "travel_date", "ref_date", "deal", "sale", "purchase", "customer", 'created_at']
+
+    base_query = CustomerSupplier.select(selected_columns)
+    if params[:customer].present?
+      base_query = base_query.where(customer: params[:customer])
     end
-    respond_to do |format|
-      format.html { redirect_to root_url, notice: "CSV file successfully created." }
+
+    if params[:supplier].present?
+      base_query = base_query.where(supplier: params[:supplier])
     end
+
+    if params[:start_date].present?
+      base_query = base_query.where("created_at >= ?", params[:start_date])
+    end
+
+    if params[:end_date].present?
+      base_query = base_query.where("created_at <= ?", params[:end_date])
+    end
+    if base_query.where_values_hash.present?
+      records = base_query.all
+      csv_data = CsvExporter.new(records).to_csv
+    end
+    if csv_data.present? 
+      send_data csv_data, filename: 'customer_suppliers.csv', type: 'text/csv'
+      return
+    end
+    flash[:alert] = "No Record Found"
+    redirect_to root_path
   end
 
   def index
+    @customer_names = CustomerSupplier.distinct.pluck(:customer)
+    @supplier_names = CustomerSupplier.distinct.pluck(:supplier)
     @q = CustomerSupplier.ransack(params[:q])
     @pagy, @customer_suppliers = pagy(@q.result(distinct: true).order(created_at: :asc), items: 10)
   end
@@ -25,21 +44,40 @@ class CustomerSuppliersController < ApplicationController
   def show
   end
 
+  def range
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    @customer_suppliers = CustomerSupplier.where(created_at: start_date..end_date)
+    if @customer_suppliers.length.eql?(0)
+      flash[:alert] = "No Record Found"
+      redirect_to root_path
+    else
+      redirect_to range_customer_suppliers_path
+    end
+  end
+
   def customers
-    @customers_with_balances = CustomerSupplier.select('customer, SUM(sale - purchase) AS balance').group(:customer)
+    @customers_with_balances = CustomerSupplier.select('customer, SUM(COALESCE(sale, 0) - COALESCE(purchase, 0)) AS balance').group(:customer)
     @total_balance = @customers_with_balances.sum(&:balance)
   end
 
   def suppliers
-    @suppliers = CustomerSupplier.select('supplier, SUM(purchase) AS balance').group(:supplier)
+    @suppliers = CustomerSupplier.select('supplier, SUM(COALESCE(purchase, 0)) AS balance').group(:supplier)
     @total_balance = @suppliers.sum(&:balance)
   end
 
   def customer
     @customer = CustomerSupplier.where(customer: params[:name])
     @name = params[:name]
-    @total_balance = @customer.sum('sale-purchase')
+    @total_balance = @customer.sum(:sale) - @customer.sum(:purchase)
   end
+
+  def supplier
+    @supplier = CustomerSupplier.where(supplier: params[:name])
+    @name = params[:name]
+    @total_balance = @customer.sum(:sale) - @customer.sum(:purchase)
+  end
+
   # GET /customer_suppliers/new
   def new
     @customer_supplier = CustomerSupplier.new

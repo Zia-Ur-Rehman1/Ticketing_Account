@@ -1,5 +1,6 @@
 <%= render 'navbar' %>
 
+
 <div class="flex justify-between p-4">
   <div>
     <%== pagy_nav(@pagy) if @pagy.pages > 1%>
@@ -11,26 +12,28 @@
     </svg>
   <% end %>
 </div>
+<span><%= render partial: 'range'%> </span>
+<%= render partial: 'export_modal', locals: {customers: @customer_names, suppliers: @supplier_names}%>
 </div>
-<%= link_to "Export CSV", export_csv_customer_suppliers_path, class: "btn btn-primary" %>
-<%= link_to "Export PDF", export_pdf_customer_suppliers_path, class: "btn btn-primary" %>
+
+</div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-2">
     <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th class="px-6 py-3"><%= sort_link(@q, :sector) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :passenger_name) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :reservation_num) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :supplier) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :air_line) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :travel_date) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :ref_date) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :deal) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :sale) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :purchase) %></th>
-              <th class="px-6 py-3"><%= sort_link(@q, :customer) %></th>
-                <th class="px-6 py-3">Action</th>
+              <th class="px-6 py-3">Sector</th>
+              <th class="px-6 py-3">Passenger Name</th>
+              <th class="px-6 py-3">Reservation Num</th>
+              <th class="px-6 py-3">Supplier</th>
+              <th class="px-6 py-3">Air Line</th>
+              <th class="px-6 py-3">Travel Date</th>
+              <th class="px-6 py-3">Ref Date</th>
+              <th class="px-6 py-3">Deal</th>
+              <th class="px-6 py-3">Sale</th>
+              <th class="px-6 py-3">Purchase</th>
+              <th class="px-6 py-3">Customer</th>
+              <th class="px-6 py-3">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +44,3 @@
     </table>
 
 </div>
-
-
-

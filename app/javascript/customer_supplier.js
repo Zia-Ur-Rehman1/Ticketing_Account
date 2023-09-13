@@ -9,4 +9,13 @@ $(document).ready(function() {
   $("#mobile-menu-button").click(function() {
     $("#mobile-menu").toggleClass("hidden");
   });
+
+  if ($('.flash-message').length > 0){
+    var flashMessage = $(".flash-message");
+    setTimeout(function () {
+      flashMessage.fadeOut("slow", function () {
+        flashMessage.remove();
+      });
+    }, 3000);
+  }
 });

@@ -17,7 +17,11 @@
     <% @customers_with_balances.each do |customer| %>
       <tr>
         <td class="px-6 py-4<%= ' text-red-500' if customer.blank? %>">
-          <%= link_to customer.customer.presence || 'N/A', customer_customer_supplier_path(name: customer.customer) %></td>
+          <% if customer.customer.present? %>
+            <%= link_to customer.customer, customer_customer_supplier_path(name: customer.customer) %>
+          <% else %>
+              N/A
+          <% end %>
         </td>
         <td class="px-6 py-4 <%= customer.balance < 0 ? 'text-red-500' : 'text-green-500' %>">
           <%= customer.balance.presence || 'N/A' %>

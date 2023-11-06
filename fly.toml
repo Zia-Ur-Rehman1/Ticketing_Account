@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for dark-dew-6600 on 2023-11-06T15:06:32+05:00
+# fly.toml app configuration file generated for husnain-travels on 2023-11-06T15:24:16+05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "dark-dew-6600"
+app = "husnain-travels"
 primary_region = "lhr"
 console_command = "/rails/bin/rails console"
 

@@ -32,12 +32,24 @@
       
       <div class="w-1/3">
         <%= form.label :supplier, class: "block text-sm font-medium text-gray-700" %>
-        <%= form.text_field :supplier, class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
+        <%= form.text_field :supplier, list: "supplierNames", class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
       </div>
-      <div class="w-1/3">
+      <datalist id="supplierNames">
+        <% params[:suppliers].each do |supplier_name| %>
+          <option value="<%= supplier_name %>">
+        <% end %>
+      </datalist>
+      
+      
+      <div class="w-1/3">        
         <%= form.label :customer, class: "block text-sm font-medium text-gray-700" %>
-        <%= form.text_field :customer, class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
+        <%= form.text_field :customer, list: "customerNames", class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
       </div>
+      <datalist id="customerNames">
+        <% params[:customers].each do |customer_name| %>
+        <option value="<%= customer_name %>">
+          <% end %>
+        </datalist>
 
       <div class="w-1/3">
         <%= form.label :air_line, class: "block text-sm font-medium text-gray-700" %>

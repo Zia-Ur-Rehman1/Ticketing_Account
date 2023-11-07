@@ -35,7 +35,7 @@
         <%= form.text_field :supplier, list: "supplierNames", class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
       </div>
       <datalist id="supplierNames">
-        <% params[:suppliers].each do |supplier_name| %>
+        <% params[:suppliers]&.each do |supplier_name| %>
           <option value="<%= supplier_name %>">
         <% end %>
       </datalist>
@@ -46,7 +46,7 @@
         <%= form.text_field :customer, list: "customerNames", class: "mt-1 p-2 w-full border rounded-md focus:ring focus:ring-blue-500 focus:border-blue-500" %>
       </div>
       <datalist id="customerNames">
-        <% params[:customers].each do |customer_name| %>
+        <% params[:customers]&.each do |customer_name| %>
         <option value="<%= customer_name %>">
           <% end %>
         </datalist>

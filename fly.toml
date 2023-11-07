@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for husnain-travels on 2023-11-06T15:24:16+05:00
+# fly.toml app configuration file generated for khan-alone on 2023-11-06T20:48:37+05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "husnain-travels"
-primary_region = "lhr"
+app = "khan-alone"
+primary_region = "sin"
 console_command = "/rails/bin/rails console"
 
 [build]
